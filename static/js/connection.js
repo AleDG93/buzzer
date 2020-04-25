@@ -7,12 +7,14 @@ var {ElementsController} = require('./elementsController');
 // Expose a singleton WebSocket connection to ShareDB server
 var socket = new ReconnectingWebSocket('ws://' + window.location.host);
 var connection = new sharedb.Connection(socket);
-var documentController = new DocumentController();
-var elementsController = new ElementsController();
+let documentController = new DocumentController();
 
-var gameDoc = connection.get(getCookie('game'), '0');
+var gameDoc = connection.get('newgame', '0');
 gameDoc.subscribe(makeMove);
 gameDoc.on('op', makeMove);
+
+var elementsController = new ElementsController(gameDoc, documentController);
+
 
 function makeMove(){
     elementsController.rewriteMap(gameDoc.data);
@@ -21,35 +23,38 @@ function makeMove(){
 function requestManager(input){
 
     var playerId = getCookie('id');
-    var playerName = getCookie('playerName');
+//    var playerName = getCookie('playerName');
     
-    if(input == 'loseSheep'){
-        documentController.loseSheep(playerId, gameDoc);
-    } else if(input == 'gainSheep'){
-        documentController.gainSheep(playerId, gameDoc)
-    } else if(input == 'goBackward'){
-        documentController.goBackward(playerId, gameDoc);
-    } else if(input == 'goForward'){
-        documentController.goForward(playerId, gameDoc);
-    } else if(input == 'throwDie'){
-        documentController.throwDie(gameDoc);
-    } else if(input == 'throwDice'){
-        documentController.throwDice(playerId, gameDoc);
-    } else if(input == 'selectedHigher'){
-        documentController.selectedHigher(gameDoc);
-    } else if(input == 'selectedLower'){
-        documentController.selectedLower(gameDoc);
-    } else if(input == 'drawCard'){
-        documentController.drawCard(gameDoc);
-    } else if(input == 'loseRelationsheep'){
-        documentController.loseRelationSheep(playerId, gameDoc);
-    } else if(input == 'getRelationsheep'){
-        documentController.getRelationSheep(playerId, gameDoc);
-    } else if(input == 'loseWorsheep'){
-        documentController.loseWorSheep(playerId, gameDoc);
-    } else if(input == 'getWorsheep'){
-        documentController.getWorSheep(playerId, gameDoc);
+    if(input == 'buzz'){
+        documentController.buzz(playerId, gameDoc);
+    } else if(input == 'resetBuzz'){
+        documentController.resetBuzz(gameDoc)
+//    } else if(input == 'addPoints'){
+//        documentController.addPoints(team, points, gameDoc);
+//    } else if(input == 'addError'){
+//        documentController.addError(team, gameDoc);
+//    } else if(input == 'resetError'){
+//        documentController.resetError(team, gameDoc);
+    } else if(input == 'nextQuestion'){
+        documentController.nextQuestion(gameDoc);
     }
+}
+
+function showAnswer(answerId){
+    console.log(answerId);
+    documentController.showAnswer(gameDoc);
+}
+
+function addPoints(team, points){
+    documentController.addPoints(team, points, gameDoc)
+}
+
+function addError(team){
+    documentController.addError(team, gameDoc);
+}
+
+function resetError(team){
+    documentController.resetError(team, gameDoc);
 }
 
 function getCookie(cname) {
@@ -66,8 +71,12 @@ function getCookie(cname) {
       }
     }
     return "";
-  }
+}
 
-global.requestManager = requestManager
+global.requestManager = requestManager;
+global.showAnswer = showAnswer;
+global.addError = addError;
+global.addPoints = addPoints;
+global.resetError = resetError;
 
-module.exports = connection
+module.exports = connection;

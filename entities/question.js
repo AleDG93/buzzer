@@ -1,7 +1,7 @@
 class Question {
-    constructor(text, answer){
+    constructor(text, answers){
         this.text = text;
-        this.answer = answer;
+        this.answers = answers;
     }
 }
 

@@ -1,5 +1,6 @@
 class Answer {
-    constructor(text, points){
+    constructor(id, text, points){
+        this.id = id;
         this.text = text;
         this.points = points;
     }

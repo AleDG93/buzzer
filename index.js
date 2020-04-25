@@ -1,3 +1,4 @@
+var file = require('./questions.json');
 var http = require('http');
 var ShareDB = require('sharedb');
 var WebSocket = require('ws');
@@ -7,6 +8,20 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var {Player} = require('./entities/player');
+var {Team} = require('./entities/team');
+var {Question} = require('./entities/question');
+var {Answer} = require('./entities/answer');
+
+var listOfQuestion = [];
+file.questions.forEach(q => {
+    var listOfAnswers = []
+    for(var i = 0; i < q.answers.length; i++){
+        var ans = new Answer(i, q.answers[i].text, q.answers[i].points)
+        listOfAnswers.push(ans);
+    }
+    var newQuestion = new Question(q.text, listOfAnswers);
+    listOfQuestion.push(newQuestion);
+})
 
 // Start shareDB
 var share = new ShareDB();
@@ -45,15 +60,15 @@ app.get('/', function(req, res) {
 // Create initial documents
 var connection = share.connect();
 app.post('/game', function(req, res){
-    
-    var gameName = '';
+    var gameName = 'newgame';
     var playerName = '';
+    var teamName = '';
 
-    if(req.body['game'] && req.body['playerName']){
-        gameName = req.body['game']
+    if(req.body['teamName'] && req.body['playerName']){
+        teamName = req.body['teamName']
         playerName = req.body['playerName']
     } else {
-        gameName = req.cookies('game');
+        teamName = req.cookies('teamName');
         playerName = req.cookies('playerName');
     }
 
@@ -63,37 +78,53 @@ app.post('/game', function(req, res){
         }
         if (results.length === 0){
             var doc = connection.get(gameName, '0');
-            var newPlayer = new Player(0, playerName, 10, 0, [], 0, false);
-            var heaven = new Heaven(0,0, new Array(12).fill(0));
+            var newPlayer = new Player(0, playerName, teamName);
+            
+            /*
+            var teamOrange = new Team('orange', [], 0, 0);
+            var teamBlue = new Team('blue', [], 0, 0);
+            if(teamName == 'orange'){
+                teamOrange.players.push(newPlayer);
+            } else {
+                teamBlue.players.push(newPlayer);
+            }
+            */
+            var teamOrange = new Team('orange',0, 0);
+            var teamBlue = new Team('blue', 0, 0);
             var game = {
-                "turn": 0,
                 "players": [newPlayer],
-                "cards": [],
-                "button": 0,
-                "prevDice": 0,
-                "heaven": [heaven]
+                "teamOrange": [teamOrange],
+                "teamBlue": [teamBlue],
+                "questions": listOfQuestion,
+                "visibleAnswers": [-1,-1,-1,-1,-1,-1,-1,-1],
+                "buzzer": -1,
+                "turn": 0
             }
             doc.create(game);
-            res.cookie('game', gameName);
+            res.cookie('teamName', teamName);
             res.cookie('playerName', playerName);
             res.cookie('id', 0);
-            res.render('pages/game')
+            res.render('pages/game');
+
         }  else {
+
             var doc = connection.get(gameName, '0');
             var wasRefresh = false;
             doc.data.players.forEach(player => {
                 if(player.name == playerName){
                     wasRefresh = true;
+                    res.cookie('teamName', player.team);
+                    res.cookie('playerName', playerName);
+                    res.cookie('id', player.id);
                 }
             });
             if(!wasRefresh){
                 var id = results[0].data.players.length;
-                var newPlayer = new Player(id, playerName, 10, 0, [], 0, false);
+                var newPlayer = new Player(id, playerName, teamName);
                 doc.submitOp([{p:['players', results[0].data.players.length], li: newPlayer}]);
-                res.cookie('game', gameName);
+                res.cookie('teamName', teamName);
                 res.cookie('playerName', playerName);
                 res.cookie('id', id);
-    
             }
             res.render('pages/game')    
         }

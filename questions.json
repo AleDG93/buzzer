@@ -1,0 +1,115 @@
+{
+    "questions": [
+        {
+            "text": "This is the first question",
+            "answers": [
+                {
+                    "text": "First answer to first question",
+                    "points": 10
+                },
+                {
+                    "text": "Second answer to first question",
+                    "points": 8
+                },
+                {
+                    "text": "Third answer to first question",
+                    "points": 6
+                },
+                {
+                    "text": "Fourth answer to first question",
+                    "points": 6
+                },
+                {
+                    "text": "Fifth answer to first question",
+                    "points": 6
+                },
+                {
+                    "text": "Sixth answer to first question",
+                    "points": 6
+                },
+                {
+                    "text": "Seventh answer to first question",
+                    "points": 6
+                },
+                {
+                    "text": "Eigth answer to first question",
+                    "points": 6
+                }
+            ]
+        },
+        {
+            "text": "This is the second question",
+            "answers": [
+                {
+                    "text": "First answer to second question",
+                    "points": 10
+                },
+                {
+                    "text": "Second answer to second question",
+                    "points": 8
+                },
+                {
+                    "text": "Third answer to second question",
+                    "points": 6
+                },
+                {
+                    "text": "Fourth answer to second question",
+                    "points": 6
+                },
+                {
+                    "text": "Fifth answer to second question",
+                    "points": 6
+                },
+                {
+                    "text": "Sixth answer to second question",
+                    "points": 6
+                },
+                {
+                    "text": "Seventh answer to second question",
+                    "points": 6
+                },
+                {
+                    "text": "Eigth answer to second question",
+                    "points": 6
+                }
+            ]
+        },
+        {
+            "text": "This is the third question",
+            "answers": [
+                {
+                    "text": "First answer to third question",
+                    "points": 10
+                },
+                {
+                    "text": "Second answer to third question",
+                    "points": 8
+                },
+                {
+                    "text": "Third answer to third question",
+                    "points": 6
+                },
+                {
+                    "text": "Fourth answer to third question",
+                    "points": 6
+                },
+                {
+                    "text": "Fifth answer to third question",
+                    "points": 6
+                },
+                {
+                    "text": "Sixth answer to third question",
+                    "points": 6
+                },
+                {
+                    "text": "Seventh answer to third question",
+                    "points": 6
+                },
+                {
+                    "text": "Eigth answer to third question",
+                    "points": 6
+                }
+            ]
+        }
+    ]
+}

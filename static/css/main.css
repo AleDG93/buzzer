@@ -6,6 +6,10 @@
     margin-bottom: 50px;
 }
 
+button{
+    margin: auto;
+}
+
 .icon-row {
     min-height: 32px;
 }

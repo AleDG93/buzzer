@@ -1,258 +1,290 @@
+
 class ElementsController {
 
-
-    drawCard(){
-
+    constructor(gameDoc, documentController){
+        this.gameDoc = gameDoc;
+        this.documentController = documentController;
     }
 
     rewriteMap(data){
 
-        
+        var blueTeamPlayers = [];
+        var orangeTeamPlayers = [];
 
-        /**
-         * Roll and set results to die
-         */
-        this.rollDie(data.prevDice);
-        /**
-         * Apply changes to heaven dice and roll dice
-         */
-        if(data.heaven[0].die1 > 0){
-            this.rollDice(data.heaven[0].die1, data.heaven[0].die2);
+        data.players.forEach(player => {
+            if(player.team == 'orange'){
+                orangeTeamPlayers.push(player);
+            } else if(player.team == 'blue') {
+                blueTeamPlayers.push(player);
+            }
+        });
+
+        if(data.buzzer != -1){
+            document.getElementById('buzz').disabled = true;
+        } else {
+            document.getElementById('buzz').disabled = false;
         }
 
         /**
-         * Apply changes to cards text area
+         * Add players into teams
          */
-
-        var cardTitle = document.getElementById('card-title');
-        var cardDescription = document.getElementById('card-description');
- 
-        if(data.cards[0] != null){
-            cardTitle.innerHTML = data.cards[0].title;
-            cardDescription.innerHTML = data.cards[0].description;
+        var blueTeamDiv = document.getElementById('team-blue-players');
+        blueTeamDiv.innerHTML = '';
+        for(var i = 0; i < blueTeamPlayers.length; i++){
+            var divPlayer = document.createElement('div');
+            if(data.buzzer == blueTeamPlayers[i].id){
+                divPlayer.setAttribute('class', 'col-2 playerDiv buzzed');
+            } else {
+                divPlayer.setAttribute('class', 'col-2 playerDiv');
+            }            
+            divPlayer.setAttribute('id', blueTeamPlayers[i].id);
+            divPlayer.innerHTML = blueTeamPlayers[i].name;
+            blueTeamDiv.appendChild(divPlayer);
         }
+
+        var orangeTeamDiv = document.getElementById('team-orange-players');
+        orangeTeamDiv.innerHTML = '';
+        for(var i = 0; i < orangeTeamPlayers.length; i++){
+            var divPlayer = document.createElement('div');
+            if(data.buzzer == orangeTeamPlayers[i].id){
+                divPlayer.setAttribute('class', 'col-2 playerDiv buzzed');
+            } else {
+                divPlayer.setAttribute('class', 'col-2 playerDiv');
+            }
+            divPlayer.setAttribute('id', orangeTeamPlayers[i].id);
+            divPlayer.innerHTML = orangeTeamPlayers[i].name;
+            orangeTeamDiv.appendChild(divPlayer);
+        }
+
+        var gameDoc = this.gameDoc;
+        var documentController = this.documentController;
+
+        console.log(data);
+
+        var visibleAnswers = [];
+        for(var j = 0; j < 8; j++){
+            if(data.visibleAnswers[j] == 0){
+                visibleAnswers.push(j);
+            }
+        }
+
         /**
-         * Apply change to "Higher" or "Lower"
-         
-
-        var higherButton = document.getElementById('higher-button');
-        var lowerButton = document.getElementById('lower-button');
-        if(data.button == 1){
-            higherButton.setAttribute('class', 'btn btn-primary higher-lower');
-            lowerButton.setAttribute('class', 'btn btn-outline-secondary higher-lower');
-        } else if(data.button == 0){
-            higherButton.setAttribute('class', 'btn btn-outline-secondary higher-lower');
-            lowerButton.setAttribute('class', 'btn btn-primary higher-lower');
-        }
+         * Write hidden answers content
         */
 
+        var questionTable = document.getElementById('question-table');
+        questionTable.innerHTML = '';
+
+        var tBody = document.createElement('tbody');
+        
+        // Create table row Question
+        var tRowQuestion = document.createElement('tr');
+        var tdQuetsion = document.createElement('td');
+        tdQuetsion.setAttribute('colspan', '2');
+        tdQuetsion.innerHTML = data.questions[data.turn].text;
+        tRowQuestion.appendChild(tdQuetsion);
+
+        // Create table rows for Answers
+        // Answers 1 and 5
+        var tRowAnswer1 = document.createElement('tr');
+        var tDataAnswer1 = document.createElement('td');
+        var tDataAnswer5 = document.createElement('td');
+        if(visibleAnswers.includes(0)){
+            tDataAnswer1.innerHTML = data.questions[data.turn].answers[0].text + " " + data.questions[data.turn].answers[0].points
+        }
+        if(visibleAnswers.includes(4)){
+            tDataAnswer5.innerHTML = data.questions[data.turn].answers[4].text + " " + data.questions[data.turn].answers[4].points
+        }
+        tRowAnswer1.appendChild(tDataAnswer1);
+        tRowAnswer1.appendChild(tDataAnswer5);
+
+        // Answers 2 and 6
+        var tRowAnswer2 = document.createElement('tr');
+        var tDataAnswer2 = document.createElement('td');
+        var tDataAnswer6 = document.createElement('td');
+        if(visibleAnswers.includes(1)){
+            tDataAnswer2.innerHTML = data.questions[data.turn].answers[1].text + " " + data.questions[data.turn].answers[1].points
+        }
+        if(visibleAnswers.includes(5)){
+            tDataAnswer6.innerHTML = data.questions[data.turn].answers[5].text + " " + data.questions[data.turn].answers[5].points
+        }
+        tRowAnswer2.appendChild(tDataAnswer2);
+        tRowAnswer2.appendChild(tDataAnswer6);
+
+        // Answers 3 and 7
+        var tRowAnswer3 = document.createElement('tr');
+        var tDataAnswer3 = document.createElement('td');
+        var tDataAnswer7 = document.createElement('td');
+
+        if(visibleAnswers.includes(2)){
+            tDataAnswer3.innerHTML = data.questions[data.turn].answers[2].text + " " + data.questions[data.turn].answers[2].points
+        }
+        if(visibleAnswers.includes(6)){
+            tDataAnswer7.innerHTML = data.questions[data.turn].answers[6].text + " " + data.questions[data.turn].answers[6].points
+        }
+        
+        tRowAnswer3.appendChild(tDataAnswer3);
+        tRowAnswer3.appendChild(tDataAnswer7);
+        
+        // Answers 4 and 8
+        var tRowAnswer4 = document.createElement('tr');
+        var tDataAnswer4 = document.createElement('td');
+        var tDataAnswer8 = document.createElement('td');
+        
+        if(visibleAnswers.includes(3)){
+            tDataAnswer4.innerHTML = data.questions[data.turn].answers[3].text + " " + data.questions[data.turn].answers[3].points
+        }
+        if(visibleAnswers.includes(7)){
+            tDataAnswer8.innerHTML = data.questions[data.turn].answers[7].text + " " + data.questions[data.turn].answers[7].points
+        }
+        
+        tRowAnswer4.appendChild(tDataAnswer4);
+        tRowAnswer4.appendChild(tDataAnswer8);
+
+        // Append rows to body
+        tBody.appendChild(tRowQuestion);
+        tBody.appendChild(tRowAnswer1);
+        tBody.appendChild(tRowAnswer2);
+        tBody.appendChild(tRowAnswer3);
+        tBody.appendChild(tRowAnswer4);
+
+        // Append body to table
+        questionTable.appendChild(tBody);
+
+
+
         /**
-         * Apply changes to the map
+         * Hosts table answers content
          */
 
-        var mapDiv = document.getElementById('map-div');
-        mapDiv.innerHTML = '';
-        var colspan = Math.floor(12 / data.players.length);
+        var hQuestionTable = document.getElementById('host-question-table');
+        hQuestionTable.innerHTML = '';
+
+        var htBody = document.createElement('tbody');
         
-        data.players.forEach(player => {
-            
-            var colDiv = document.createElement('div');
-            colDiv.setAttribute('class', 'col-' + colspan);
-            colDiv.setAttribute('id', player.id);
+        // Create table row Question
+        var htRowQuestion = document.createElement('tr');
+        var htdQuetsion = document.createElement('td');
+        htdQuetsion.setAttribute('colspan', '2');
+        htdQuetsion.innerHTML = data.questions[data.turn].text;
+        htRowQuestion.appendChild(htdQuetsion);
 
-            // Create icons row
-            var iconRow = document.createElement('div');
-            iconRow.setAttribute('class', 'row icon-row');
+        // Create table rows for Answers
+        // Answers 1 and 5
+        var htRowAnswer1 = document.createElement('tr');
 
-            if(data.heaven[0].players[player.id] > 0){
-                var h4heaven = document.createElement('label');
-                h4heaven.setAttribute('class', 'label-player');
-                h4heaven.innerHTML = data.heaven[0].players[player.id];
-                iconRow.appendChild(h4heaven);
-            }
-
-            var heartImg = document.createElement('img');
-            heartImg.setAttribute('src', '/images/heart.png');
-            heartImg.setAttribute('class', 'icon-image');
-
-            heartImg.style.visibility = "hidden";
-
-            var worsheepImg = document.createElement('img');
-            worsheepImg.setAttribute('src', '/images/worsheep.png');
-            worsheepImg.setAttribute('class', 'icon-image');
-            worsheepImg.style.visibility = "hidden";
-            
-            player.gadget.forEach(el => {
-                if(el == 'relation'){
-                    heartImg.style.visibility = "visible";
-                } else if (el == 'worsheep') {
-                    worsheepImg.style.visibility = "visible";
-                }
-            })
-
-            // Append images to iconRow
-            iconRow.appendChild(heartImg);
-            iconRow.appendChild(worsheepImg);
-
-            // Append icon row to colDiv
-            colDiv.appendChild(iconRow);
-
-            // Create first row with names
-            var rowDiv1 = document.createElement('div');
-            rowDiv1.setAttribute('class', 'row');
-            // Create button
-            var labelPlayer = document.createElement('label');
-            labelPlayer.setAttribute('id', player.id);
-            labelPlayer.setAttribute('class', 'label-player');
-            labelPlayer.innerHTML = player.name;
-
-            // Append button to first row
-            rowDiv1.appendChild(labelPlayer);
-
-            // Create second row with map
-            var rowDiv2 = document.createElement('div');
-            rowDiv2.setAttribute('class', 'row');
-            
-            // Create large dive
-            var largDiv = document.createElement('div');
-            largDiv.setAttribute('class', 'large-8 large-centered');
-
-            // Create map wrapper
-            var wrapperDiv = document.createElement('div');
-            wrapperDiv.setAttribute('class', 'map-wrapper');
-            if (player.position < 30){
-
-                // Create normal map
-                for(var i = 0; i < 10; i++){
-                            
-
-                    // Create player "pawn"
-                    var circleDiv = document.createElement('div');
-                    circleDiv.setAttribute('class', 'map-circle');
-                    var mapText = document.createElement('h5');
-                    mapText.setAttribute('class', 'map-text');
-                    if(i == player.position % 10){
-                        // Create sheep image
-                        var sheepImg = document.createElement('img');
-                        sheepImg.setAttribute('src', '/images/sheep.png')
-                        sheepImg.setAttribute('class', 'sheep-image');
-                        circleDiv.appendChild(sheepImg);
-                        mapText.innerHTML = player.numOfSheep;
-                    }
-                    var verticalDiv = document.createElement('div');
-                    verticalDiv.setAttribute('class', 'vertical-line');
-                    if(player.position < 10){
-                        verticalDiv.style.backgroundColor = '#FF4605';
-                        circleDiv.style.backgroundColor = '#FF4605';
-                    } else if(player.position >= 10 && player.position < 20){
-                        verticalDiv.style.backgroundColor = '#70483C';
-                        circleDiv.style.backgroundColor = '#70483C';
-                    } else if(player.position >= 20 && player.position < 30){
-                        verticalDiv.style.backgroundColor = '#00FFFF';
-                        circleDiv.style.backgroundColor = '#00FFFF';
-                    }
-                    // Append player "pawn" to map wrapper
-                    circleDiv.appendChild(mapText);
-                    wrapperDiv.appendChild(circleDiv);
-                    wrapperDiv.appendChild(verticalDiv);
-                }
-            } else {
-            
-                var hDiceButton = document.getElementById('heaven-roll');
-                var hDice = document.getElementById('heaven-dice');
-                hDiceButton.style.display = 'grid';
-                hDice.style.display = 'grid';
-
-                // Create heaven
-                for(var i = 0; i < 5; i++){
-                            
-
-                    // Create player "pawn"
-                    var circleDiv = document.createElement('div');
-                    circleDiv.setAttribute('class', 'map-circle');
-                    var mapText = document.createElement('h5');
-                    mapText.setAttribute('class', 'map-text');
-
-                    switch(i){
-                        case 1:
-                            circleDiv.setAttribute('data-tooltip', 'Odd or Even');
-                            break;
-                        case 2:
-                            circleDiv.setAttribute('data-tooltip', '[5 | 8 | 11] or [3 | 6 | 9]');
-                            break;
-                        case 3:
-                            circleDiv.setAttribute('data-tooltip', '[4 | 8 | 12] or [2 | 6 | 10]');
-                            break;
-                        case 4:
-                            circleDiv.setAttribute('data-tooltip', '[7] or [double]');                  
-                    }
-
-
-                    if(i == player.position % 10){
-                        // Create sheep image
-                        var sheepImg = document.createElement('img');
-                        sheepImg.setAttribute('src', '/images/sheep.png')
-                        sheepImg.setAttribute('class', 'sheep-image');
-                        circleDiv.appendChild(sheepImg);
-                        mapText.innerHTML = player.numOfSheep;
-                    }
-                    var verticalDiv = document.createElement('div');
-                    verticalDiv.setAttribute('class', 'vertical-line');
-
-                    verticalDiv.style.background = 'radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%)';
-                    circleDiv.style.background = 'radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%)';
-
-                    // Append player "pawn" to map wrapper
-                    circleDiv.appendChild(mapText);
-                    wrapperDiv.appendChild(circleDiv);
-                    if(i!==4){
-                        wrapperDiv.appendChild(verticalDiv);
-                    }
-                }
-            }
-
-            // Create vertical hr
-            var verticalHr = document.createElement('hr');
-            verticalHr.setAttribute('class', 'vertical map-hr');
-
-            // Append wrapper to large div
-            largDiv.appendChild(wrapperDiv);
-            
-            // Append large div and vertical hr to row
-            rowDiv2.appendChild(largDiv);
-            rowDiv2.appendChild(verticalHr);
-
-            // Append rows to col-1
-            colDiv.appendChild(rowDiv1);
-            colDiv.appendChild(rowDiv2);
-
-            // Append colDiv to map-div
-            mapDiv.insertBefore(colDiv, mapDiv.firstChild);
+        var htDataAnswer1 = document.createElement('td');
+        var buttonAnswer1 = document.createElement('button');
+        buttonAnswer1.innerHTML = 'Show answer';
+        buttonAnswer1.addEventListener("click", function(){
+            documentController.showAnswer(0, gameDoc);
         });
-    }
+       
+        var htDataAnswer5 = document.createElement('td');
+        var buttonAnswer5 = document.createElement('button');
+        buttonAnswer5.innerHTML = 'Show answer';
+        buttonAnswer5.addEventListener("click", function(){
+            documentController.showAnswer(4, gameDoc);
+        });
 
-    rollDice(num1, num2) {
-        const die1 = document.querySelector('#hdie-1');
-        const die2 = document.querySelector('#hdie-2');
+        htDataAnswer1.innerHTML = data.questions[data.turn].answers[0].text + " " + data.questions[data.turn].answers[0].points
+        htDataAnswer5.innerHTML = data.questions[data.turn].answers[4].text + " " + data.questions[data.turn].answers[4].points
 
-        this.toggleClasses(die1);
-        this.toggleClasses(die2);
+        htDataAnswer1.appendChild(buttonAnswer1);
+        htDataAnswer5.appendChild(buttonAnswer5);
         
-        die1.dataset.roll = num1;
-        die2.dataset.roll = num2;
-        
-      }
-      
+        htRowAnswer1.appendChild(htDataAnswer1);
+        htRowAnswer1.appendChild(htDataAnswer5);
 
-    rollDie(num) {
-        const die = document.getElementById("die-1");
-        this.toggleClasses(die);
-        die.dataset.roll = num;
-    }
-      
-    toggleClasses(die) {
-        die.classList.toggle("odd-roll");
-        die.classList.toggle("even-roll");
+        // Answers 2 and 6
+        var htRowAnswer2 = document.createElement('tr');
+
+        var htDataAnswer2 = document.createElement('td');
+        var buttonAnswer2 = document.createElement('button');
+        buttonAnswer2.innerHTML = 'Show answer';
+        buttonAnswer2.addEventListener("click", function(){
+            documentController.showAnswer(1, gameDoc);
+        });
+
+        var htDataAnswer6 = document.createElement('td');
+        var buttonAnswer6 = document.createElement('button');
+        buttonAnswer6.innerHTML = 'Show answer';
+        buttonAnswer6.addEventListener("click", function(){
+            documentController.showAnswer(5, gameDoc);
+        });
+
+
+        htDataAnswer2.innerHTML = data.questions[data.turn].answers[1].text + " " + data.questions[data.turn].answers[1].points
+        htDataAnswer6.innerHTML = data.questions[data.turn].answers[5].text + " " + data.questions[data.turn].answers[5].points
+
+        htDataAnswer2.appendChild(buttonAnswer2);
+        htDataAnswer6.appendChild(buttonAnswer6);
+
+        htRowAnswer2.appendChild(htDataAnswer2);
+        htRowAnswer2.appendChild(htDataAnswer6);
+
+        // Answers 3 and 7
+        var htRowAnswer3 = document.createElement('tr');
+
+        var htDataAnswer3 = document.createElement('td');
+        var buttonAnswer3 = document.createElement('button');
+        buttonAnswer3.innerHTML = 'Show answer';
+        buttonAnswer3.addEventListener("click", function(){
+            documentController.showAnswer(2, gameDoc);
+        });
+
+        var htDataAnswer7 = document.createElement('td');
+        var buttonAnswer7 = document.createElement('button');
+        buttonAnswer7.innerHTML = 'Show answer';
+        buttonAnswer7.addEventListener("click", function(){
+            documentController.showAnswer(6, gameDoc);
+        });
+
+        htDataAnswer3.innerHTML = data.questions[data.turn].answers[2].text + " " + data.questions[data.turn].answers[2].points
+        htDataAnswer7.innerHTML = data.questions[data.turn].answers[6].text + " " + data.questions[data.turn].answers[6].points
+        
+        htDataAnswer3.appendChild(buttonAnswer3);
+        htDataAnswer7.appendChild(buttonAnswer7);
+
+        htRowAnswer3.appendChild(htDataAnswer3);
+        htRowAnswer3.appendChild(htDataAnswer7);
+        
+        // Answers 4 and 8
+        var htRowAnswer4 = document.createElement('tr');
+
+        var htDataAnswer4 = document.createElement('td');
+        var buttonAnswer4 = document.createElement('button');
+        buttonAnswer4.innerHTML = 'Show answer';
+        buttonAnswer4.addEventListener("click", function(){
+            documentController.showAnswer(3, gameDoc);
+        });
+
+        var htDataAnswer8 = document.createElement('td');
+        var buttonAnswer8 = document.createElement('button');
+        buttonAnswer8.innerHTML = 'Show answer';
+        buttonAnswer8.addEventListener("click", function(){
+            documentController.showAnswer(7, gameDoc);
+        });
+
+        htDataAnswer4.innerHTML = data.questions[data.turn].answers[3].text + " " + data.questions[data.turn].answers[3].points
+        htDataAnswer8.innerHTML = data.questions[data.turn].answers[7].text + " " + data.questions[data.turn].answers[7].points
+
+        htDataAnswer4.appendChild(buttonAnswer4);
+        htDataAnswer8.appendChild(buttonAnswer8);
+
+        htRowAnswer4.appendChild(htDataAnswer4);
+        htRowAnswer4.appendChild(htDataAnswer8);
+
+        // Append rows to body
+        htBody.appendChild(htRowQuestion);
+        htBody.appendChild(htRowAnswer1);
+        htBody.appendChild(htRowAnswer2);
+        htBody.appendChild(htRowAnswer3);
+        htBody.appendChild(htRowAnswer4);
+
+        // Append body to table
+        hQuestionTable.appendChild(htBody);
+    
     }
 }
 

@@ -1,124 +1,68 @@
 var {Player} = require('../../entities/player');
-var {Card} = require('../../entities/card');
-var {Heaven} = require('../../entities/heaven');
-var file = require('../../cards.json');
+var {Team} = require('../../entities/team');
+var file = require('../../questions.json');
 
 class DocumentController {
 
-    /***********************************************************************
-     ***********************************************************************
-     *****                     Player controllers                   ********
-     ***********************************************************************
-     ***********************************************************************
-     */
 
-    gainSheep(playerId, gameDocument){
-
-        var newPlayer = gameDocument.data.players[playerId];
-        newPlayer.numOfSheep = newPlayer.numOfSheep + 1;
-        gameDocument.submitOp([{p:['players', playerId], ld: gameDocument.data.players[playerId], li: newPlayer}]);
-    }
-    
-    loseSheep(playerId, gameDocument){
-    
-        var newPlayer = gameDocument.data.players[playerId];
-        newPlayer.numOfSheep = newPlayer.numOfSheep - 1;
-        gameDocument.submitOp([{p:['players', playerId], ld: gameDocument.data.players[playerId], li: newPlayer}]);
+    buzz(playerId, gameDocument){
+        var buzzedId = parseInt(playerId) + 1;
+        gameDocument.submitOp([{p:['buzzer'], na: buzzedId}]);
     }
 
-    goBackward(playerId, gameDocument){
-        var newPlayer = gameDocument.data.players[playerId];
-        newPlayer.position = newPlayer.position - 1;
-        gameDocument.submitOp([{p:['players', playerId], ld: gameDocument.data.players[playerId], li: newPlayer}]);
-    }
-    goForward(playerId, gameDocument){
-        var newPlayer = gameDocument.data.players[playerId];
-        newPlayer.position = newPlayer.position + 1;
-        gameDocument.submitOp([{p:['players', playerId], ld: gameDocument.data.players[playerId], li: newPlayer}]);
-    }
-    getRelationSheep(playerId, gameDocument){
-        var newPlayer = gameDocument.data.players[playerId];
-        newPlayer.gadget.push('relation');
-        gameDocument.submitOp([{p:['players', playerId], ld: gameDocument.data.players[playerId], li: newPlayer}]);
-        
-    }
-    getWorSheep(playerId, gameDocument){
 
-        var newPlayer = gameDocument.data.players[playerId];
-        newPlayer.gadget.push('worsheep');
-        gameDocument.submitOp([{p:['players', playerId], ld: gameDocument.data.players[playerId], li: newPlayer}]);
+    resetBuzz(gameDocument){
+        var buzzer = (parseInt(gameDocument.data.buzzer) + 1) * (-1);
+        gameDocument.submitOp([{p:['buzzer'], na: buzzer}]);
     }
 
-    loseRelationSheep(playerId, gameDocument){
-        
-        var newPlayer = gameDocument.data.players[playerId];
-        var newGadgets = newPlayer.gadget.filter(e => e !== 'relation');
-        newPlayer.gadget = newGadgets;
-        gameDocument.submitOp([{p:['players', playerId], ld: gameDocument.data.players[playerId], li: newPlayer}]);
-    }
-
-    loseWorSheep(playerId, gameDocument){
-
-        var newPlayer = gameDocument.data.players[playerId];
-        var newGadgets = newPlayer.gadget.filter(e => e !== 'worsheep');
-        newPlayer.gadget = newGadgets;
-        gameDocument.submitOp([{p:['players', playerId], ld: gameDocument.data.players[playerId], li: newPlayer}]);
-
-    }
-
-    /***********************************************************************
-     ***********************************************************************
-     *****                     Game controllers                     ********
-     ***********************************************************************
-     ***********************************************************************
-     */
-
-    selectedHigher(gameDocument){
-        var result = 1 - gameDocument.data.button;
-        gameDocument.submitOp([{p:['button'], na: result}]);
-    }
-
-    selectedLower(gameDocument){
-        var result = 0 - gameDocument.data.button;
-        gameDocument.submitOp([{p:['button'], na: result}]);
-    }
-
-    throwDie(gameDocument){
-
-        var result = (Math.floor(Math.random() * 6) + 1) - gameDocument.data.prevDice;  // returns a random integer from 1 to 6
-        gameDocument.submitOp([{p:['prevDice'], na: result}]);
-    }
-
-    throwDice(playerId, gameDocument){
-
-
-        
-        var result1 = (Math.floor(Math.random() * 6) + 1);  // returns a random integer from 1 to 6
-        var result2 = (Math.floor(Math.random() * 6) + 1);  // returns a random integer from 1 to 6
-
-        var newHeaven = new Heaven(result1, result2, gameDocument.data.heaven[0].players);
-        newHeaven.players[playerId] = (result1 + result2);
-        gameDocument.submitOp([{p:['heaven', 0], ld: gameDocument.data.heaven[0], li: newHeaven}]);  
-    }
-
-    shuffleDeck(gameDocument){
-        var listOfCards = this.shuffle(file.cards);
-        
-        listOfCards.forEach(card => {
-            var newCard = new Card(card.title, card.description);
-            gameDocument.submitOp([{p:['cards', 0], li: newCard}]);    
-        });
-    }
-
-    drawCard(gameDocument){
-
-        if(gameDocument.data.cards.length == 0){
-            this.shuffleDeck(gameDocument);
+    addPoints(team, points, gameDocument){
+        if(team == 'orange'){
+            var newPoints = gameDocument.data.teamOrange.points + points;
+            var newTeamOrange = new Team(gameDocument.data.teamOrange.name, newPoints, gameDocument.data.teamOrange.errors);
+            gameDocument.submitOp([{p:['teamOrange', 0], ld: gameDocument.data.teamOrange[0], li: newTeamOrange}]);  
+        } else {
+            var newPoints = gameDocument.data.teamBlue.points + points;
+            var teamBlue = new Team(gameDocument.data.teamBlue.name, newPoints, gameDocument.data.teamBlue.errors);
+            gameDocument.submitOp([{p:['teamBlue', 0], ld: gameDocument.data.teamBlue[0], li: newTeamBlue}]);  
         }
-        var card = new Card(gameDocument.data.cards[0]);
-        gameDocument.submitOp([{p:['cards', 0], ld: card}]);    
     }
-    
+
+    addError(team, gameDocument){
+        if(team == 'orange'){
+            var newErrors = gameDocument.data.teamOrange.errors + 1;
+            var newTeamOrange = new Team(gameDocument.data.teamOrange.name, gameDocument.data.teamOrange.points, newErrors);
+            gameDocument.submitOp([{p:['teamOrange', 0], ld: gameDocument.data.teamOrange[0], li: newTeamOrange}]);  
+        } else {
+            var newErrors = gameDocument.data.teamBlue.errors + 1;
+            var teamBlue = new Team(gameDocument.data.teamBlue.name, gameDocument.data.teamBlue.points, newErrors);
+            gameDocument.submitOp([{p:['teamBlue', 0], ld: gameDocument.data.teamBlue[0], li: newTeamBlue}]);  
+        }
+
+    }
+
+    resetError(team, gameDocument){
+        if(team == 'orange'){
+            var newTeamOrange = new Team(gameDocument.data.teamOrange.name, gameDocument.data.teamOrange.points, 0);
+            gameDocument.submitOp([{p:['teamOrange', 0], ld: gameDocument.data.teamOrange[0], li: newTeamOrange}]);  
+        } else {
+            var teamBlue = new Team(gameDocument.data.teamBlue.name, gameDocument.data.teamBlue.points, 0);
+            gameDocument.submitOp([{p:['teamBlue', 0], ld: gameDocument.data.teamBlue[0], li: newTeamBlue}]);  
+        }
+    }
+
+    nextQuestion(gameDocument){
+        for(var i = 0; i < 8; i++){
+            // Replace values in visible answers with -1
+            gameDocument.submitOp([{p:['visibleAnswers', i], ld: gameDocument.data.visibleAnswers[i], li: -1}])
+        }
+        gameDocument.submitOp([{p:['turn'], na: 1}]);
+    }
+
+    showAnswer(answerId, gameDocument){
+        gameDocument.submitOp([{p:['visibleAnswers', answerId], na: 1}]);
+    }
+
 
     shuffle(array) {
         var currentIndex = array.length, temporaryValue, randomIndex;
