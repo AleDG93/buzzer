@@ -31,10 +31,6 @@ function requestManager(input){
         documentController.resetBuzz(gameDoc)
 //    } else if(input == 'addPoints'){
 //        documentController.addPoints(team, points, gameDoc);
-//    } else if(input == 'addError'){
-//        documentController.addError(team, gameDoc);
-//    } else if(input == 'resetError'){
-//        documentController.resetError(team, gameDoc);
     } else if(input == 'nextQuestion'){
         documentController.nextQuestion(gameDoc);
     }
@@ -49,13 +45,6 @@ function addPoints(team, points){
     documentController.addPoints(team, points, gameDoc)
 }
 
-function addError(team){
-    documentController.addError(team, gameDoc);
-}
-
-function resetError(team){
-    documentController.resetError(team, gameDoc);
-}
 
 function getCookie(cname) {
     var name = cname + "=";
@@ -75,8 +64,6 @@ function getCookie(cname) {
 
 global.requestManager = requestManager;
 global.showAnswer = showAnswer;
-global.addError = addError;
 global.addPoints = addPoints;
-global.resetError = resetError;
 
 module.exports = connection;

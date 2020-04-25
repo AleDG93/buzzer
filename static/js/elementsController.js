@@ -63,10 +63,18 @@ class ElementsController {
 
         var visibleAnswers = [];
         for(var j = 0; j < 8; j++){
-            if(data.visibleAnswers[j] == 0){
+            if(data.visibleAnswers[j] >= 0){
                 visibleAnswers.push(j);
             }
         }
+
+        /**
+         * Set points
+         */
+        var bluePoints = document.getElementById('blue-points-count');
+        var orangePoints = document.getElementById('orange-points-count');
+        bluePoints.innerHTML = data.teamBlue[0].points;
+        orangePoints.innerHTML = data.teamOrange[0].points;
 
         /**
          * Write hidden answers content
@@ -91,9 +99,13 @@ class ElementsController {
         var tDataAnswer5 = document.createElement('td');
         if(visibleAnswers.includes(0)){
             tDataAnswer1.innerHTML = data.questions[data.turn].answers[0].text + " " + data.questions[data.turn].answers[0].points
+        } else {
+            tDataAnswer1.innerHTML = "1."
         }
         if(visibleAnswers.includes(4)){
             tDataAnswer5.innerHTML = data.questions[data.turn].answers[4].text + " " + data.questions[data.turn].answers[4].points
+        } else {
+            tDataAnswer5.innerHTML = "5."
         }
         tRowAnswer1.appendChild(tDataAnswer1);
         tRowAnswer1.appendChild(tDataAnswer5);
@@ -104,9 +116,13 @@ class ElementsController {
         var tDataAnswer6 = document.createElement('td');
         if(visibleAnswers.includes(1)){
             tDataAnswer2.innerHTML = data.questions[data.turn].answers[1].text + " " + data.questions[data.turn].answers[1].points
+        } else {
+            tDataAnswer2.innerHTML = "2."
         }
         if(visibleAnswers.includes(5)){
             tDataAnswer6.innerHTML = data.questions[data.turn].answers[5].text + " " + data.questions[data.turn].answers[5].points
+        } else {
+            tDataAnswer6.innerHTML = "6."
         }
         tRowAnswer2.appendChild(tDataAnswer2);
         tRowAnswer2.appendChild(tDataAnswer6);
@@ -118,9 +134,13 @@ class ElementsController {
 
         if(visibleAnswers.includes(2)){
             tDataAnswer3.innerHTML = data.questions[data.turn].answers[2].text + " " + data.questions[data.turn].answers[2].points
+        } else {
+            tDataAnswer3.innerHTML = "3."
         }
         if(visibleAnswers.includes(6)){
             tDataAnswer7.innerHTML = data.questions[data.turn].answers[6].text + " " + data.questions[data.turn].answers[6].points
+        } else {
+            tDataAnswer7.innerHTML = "7."
         }
         
         tRowAnswer3.appendChild(tDataAnswer3);
@@ -133,9 +153,13 @@ class ElementsController {
         
         if(visibleAnswers.includes(3)){
             tDataAnswer4.innerHTML = data.questions[data.turn].answers[3].text + " " + data.questions[data.turn].answers[3].points
+        } else {
+            tDataAnswer4.innerHTML = "4."
         }
         if(visibleAnswers.includes(7)){
             tDataAnswer8.innerHTML = data.questions[data.turn].answers[7].text + " " + data.questions[data.turn].answers[7].points
+        } else {
+            tDataAnswer8.innerHTML = "8."
         }
         
         tRowAnswer4.appendChild(tDataAnswer4);
@@ -284,7 +308,10 @@ class ElementsController {
 
         // Append body to table
         hQuestionTable.appendChild(htBody);
-    
+        
+        var nextQuestion = document.getElementById('next-question');
+        nextQuestion.innerHTML = data.questions[data.turn + 1].text
+
     }
 }
 

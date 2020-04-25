@@ -1,4 +1,4 @@
-var file = require('./questions.json');
+var file = require('./result.json');
 var http = require('http');
 var ShareDB = require('sharedb');
 var WebSocket = require('ws');

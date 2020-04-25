@@ -6,8 +6,70 @@
     margin-bottom: 50px;
 }
 
-button{
+.points-div > *{
+    align-content: center;
+}
+#orange-title{
+    color: #F2771A;
+}
+#blue-title {
+    color: #1167b1
+}
+.playerDiv {
+    color: #333; 
+    font-family: 'Raleway',sans-serif; 
+    font-size: 18px; 
+    font-weight: 800; 
+    line-height: 36px; 
+    margin: 0 0 24px; 
+    text-align: center; 
+}
+
+.buzzed {
+    background-color:#d02718 ;
+}
+
+.normal-buttons {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#buzz {
     margin: auto;
+    margin-top: 60px;
+    margin-bottom: 60px;
+	box-shadow: 1px 11px 3px 1px #8a2a21;
+	background:linear-gradient(to bottom, #c62d1f 5%, #f24437 100%);
+	background-color:#c62d1f;
+	border-radius:92px;
+	border:9px solid #d02718;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Verdana;
+	font-size:20px;
+	padding:48px 42px;
+	text-decoration:none;
+	text-shadow:0px 2px 0px #810e05;
+}
+
+#buzz:hover {
+	background:linear-gradient(to bottom, #f24437 5%, #c62d1f 100%);
+	background-color:#f24437;
+}
+#buzz:active {
+	position:relative;
+	top:1px;
+}
+
+#buzz:disabled{
+    background-color:gray;
+    background:linear-gradient(to bottom, #161616 5%, #969595 100%);
+    text-shadow:0px 2px 0px gray;
+    border:9px solid gray;
+    
+
+
 }
 
 .icon-row {

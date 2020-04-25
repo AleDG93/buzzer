@@ -30,6 +30,18 @@
         }
     });
     
+    function givePoints(team){
+        if(team == 'orange'){
+            var points = document.getElementById('orangePoints').value;
+            console.log(points)
+            addPoints('orange', points);
+        } else if (team == 'blue'){
+            var points = document.getElementById('bluePoints').value;    
+            console.log(points)
+            addPoints('blue', points);
+        }        
+    }
+
     </script>
 </head>
 <div class="containerfluid main">
@@ -38,53 +50,39 @@
         <div class="col-6">
             <div class="row">
                 <div class="col-12">
-                    <h3>Team orange</h3>
+                    <h3 class="d-flex justify-content-center" id="orange-title">Team orange</h3>
                 </div>
             </div>
             <div class="row" id="team-orange-players">
             </div>
-<!--            <div class="row">
-                <div class="col-12">
-                    <h3>Points: 0</h3>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-12">
-                    <h3>Errors: 0</h3>
+                    <h5 class="d-flex justify-content-center">Points:</h5><h3 class="d-flex justify-content-center" id="orange-points-count">0</h3>
                 </div>
             </div>
-            -->
         </div>
 
         <!-- Team blue page -->
         <div class="col-6">
             <div class="row">
                 <div class="col-12">
-                    <h3>Team blue</h3>
+                    <h3 class="d-flex justify-content-center" id="blue-title">Team blue</h3>
                 </div>
             </div>
             <div class="row" id="team-blue-players">
             </div>
-            <!--
             <div class="row">
                 <div class="col-12">
-                    <h3>Points: 0</h3>
+                    <h5 class="d-flex justify-content-center">Points:</h5><h3 class="d-flex justify-content-center" id="blue-points-count">0</h3>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <h3>Errors: 0</h3>
-                </div>
-            </div>
-            -->
         </div>
     </div>
     <div class="row">
         <button onclick="requestManager('buzz')" id="buzz">Buzzer</button>
     </div>
     <div class="row">
-        <table class="table table-bordered" id="question-table">
-
+        <table class="table table-striped" id="question-table">
           </table>
     </div>
 
@@ -92,10 +90,10 @@
     <div id="host-div" hidden>
         <div class="row">
             <div class="col-6">
-                <button onclick="requestManager('resetBuzz')">Reset buzzer</button>
+                <button class="btn btn-info normal-buttons" onclick="requestManager('resetBuzz')">Reset buzzer</button>
             </div>
             <div class="col-6">
-                <button onclick="requestManager('nextQuestion')">Next question</button>
+                <button class="btn btn-info normal-buttons" onclick="requestManager('nextQuestion')">Next question</button>
             </div>
         </div>
 
@@ -103,28 +101,24 @@
             <div class="col-6">
                 <div class="row">
                     <div class="col-6">
-                        <input type="text">
-                        <button onclick="addPoints('orange', 1)">Give points</button>
-                    </div>
-                    <div class="col-6">
-                        <button onclick="resetErrors('orange')">Reset errors</button>
+                        <label>Orange points</label>
+                        <input type="text" id="orangePoints">
+                        <button class="btn btn-info" onclick="givePoints('orange')">Give points</button>
                     </div>
                 </div>
             </div>
             <div class="col-6">
                 <div class="row">
                     <div class="col-6">
-                        <input type="text">
-                        <button onclick="addPoints('blue', 1)">Give points</button>
-                    </div>
-                    <div class="col-6">
-                        <button onclick="resetErrors('blue')">Reset errors</button>
+                        <label>Blue Points</label>
+                        <input type="text" id="bluePoints">
+                        <button class="btn btn-info" onclick="givePoints('blue')">Give points</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <table class="table table-bordered" id="host-question-table">
+            <table class="table table-striped" id="host-question-table">
                 <tbody>
                     <tr>
                         <td colspan="2">
@@ -149,6 +143,11 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                Next question: <h5 id="next-question"></h5>
+            </div>
         </div>
     </div>
 </div>

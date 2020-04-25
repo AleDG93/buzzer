@@ -1,0 +1,697 @@
+{
+	"questions": [
+		{
+		"text":"Nominate un luogo/oggetto dove le persone devono usare le monete/gettoni.",
+		"answers":[
+			{
+			"text": "macchinetta cibo/bevande",
+			"points":24
+			},{
+			"text": "lavasecco automatico",
+			"points":19
+			},{
+			"text": "autobus biglietto",
+			"points":16
+			},{
+			"text": "parchimetro",
+			"points":13
+			},{
+			"text": "lavaggio auto",
+			"points":12
+			},{
+			"text": "giochi ",
+			"points":8
+			},{
+			"text": "nan",
+			"points":0
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Dammi il nome di un famoso mago",
+		"answers":[
+			{
+			"text": "Harry Potter",
+			"points":37
+			},{
+			"text": "Merlino",
+			"points":26
+			},{
+			"text": "Gandalf",
+			"points":11
+			},{
+			"text": "Dr. Strange",
+			"points":9
+			},{
+			"text": "Il mago di Oz",
+			"points":8
+			},{
+			"text": "Voldemort",
+			"points":3
+			},{
+			"text": "Silvan",
+			"points":2
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Dammi un sinonimo di libro",
+		"answers":[
+			{
+			"text": "Volume",
+			"points":40
+			},{
+			"text": "Romanzo",
+			"points":31
+			},{
+			"text": "Opera",
+			"points":10
+			},{
+			"text": "Testo",
+			"points":4
+			},{
+			"text": "Manuale",
+			"points":4
+			},{
+			"text": "Saggio",
+			"points":3
+			},{
+			"text": "Trattato",
+			"points":3
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Dimmi il nome di chi potrebbe avere un giovane sul suo tatuaggio.",
+		"answers":[
+			{
+			"text": "Mamma",
+			"points":33
+			},{
+			"text": "Moglie / ragazza",
+			"points":25
+			},{
+			"text": "Figlio",
+			"points":14
+			},{
+			"text": "Dio",
+			"points":10
+			},{
+			"text": "Pap�",
+			"points":6
+			},{
+			"text": "Nonno/a",
+			"points":5
+			},{
+			"text": "Animale domestico",
+			"points":2
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Nomina un personaggio di Game of Thrones.",
+		"answers":[
+			{
+			"text": "Jon Snow",
+			"points":26
+			},{
+			"text": "Daenerys Khaleesi Targaryen",
+			"points":23
+			},{
+			"text": "Arya Stark",
+			"points":22
+			},{
+			"text": "Tyrion The Dwarf Lannister",
+			"points":15
+			},{
+			"text": "Cersai Lannister",
+			"points":7
+			},{
+			"text": "Jaime Lannister",
+			"points":3
+			},{
+			"text": "Sansa Stark",
+			"points":3
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Dimmi un motivo per cui potresti essere in ritardo al lavoro/Uni",
+		"answers":[
+			{
+			"text": "Traffico",
+			"points":38
+			},{
+			"text": "Sveglia tardi",
+			"points":26
+			},{
+			"text": "Incidente",
+			"points":11
+			},{
+			"text": "Mezzo pubblico in ritardo",
+			"points":10
+			},{
+			"text": "Emergenza bagno",
+			"points":5
+			},{
+			"text": "Meteo",
+			"points":4
+			},{
+			"text": "Sbornia",
+			"points":4
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Dimmi un motivo per cui potresti essere in ritardo al lavoro/Uni",
+		"answers":[
+			{
+			"text": "Traffico",
+			"points":38
+			},{
+			"text": "Sveglia tardi",
+			"points":26
+			},{
+			"text": "Incidente",
+			"points":11
+			},{
+			"text": "Mezzo pubblico in ritardo",
+			"points":10
+			},{
+			"text": "Emergenza bagno",
+			"points":5
+			},{
+			"text": "Meteo",
+			"points":4
+			},{
+			"text": "Sbornia",
+			"points":4
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Qual � la prima cosa che la maggior parte delle persone fa al mattino?",
+		"answers":[
+			{
+			"text": "Bagno",
+			"points":24
+			},{
+			"text": "Doccia",
+			"points":19
+			},{
+			"text": "Prima colazione",
+			"points":18
+			},{
+			"text": "Aprire gli occhi",
+			"points":15
+			},{
+			"text": "Spegnere la sveglia / Snooze",
+			"points":12
+			},{
+			"text": "Lavarsi i denti",
+			"points":7
+			},{
+			"text": "Vestirsi",
+			"points":2
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Dimmi il nome di una pianta che la gente potrebbe coltivare sul balcone",
+		"answers":[
+			{
+			"text": "Fiori",
+			"points":33
+			},{
+			"text": "Rosmarino",
+			"points":31
+			},{
+			"text": "Pomodori",
+			"points":14
+			},{
+			"text": "Salvia",
+			"points":7
+			},{
+			"text": "Prezzemolo",
+			"points":4
+			},{
+			"text": "Menta",
+			"points":3
+			},{
+			"text": "Erba/Weed",
+			"points":3
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Dimmi il nome di una pianta che la gente potrebbe coltivare sul balcone",
+		"answers":[
+			{
+			"text": "Fiori",
+			"points":33
+			},{
+			"text": "Rosmarino",
+			"points":31
+			},{
+			"text": "Pomodori",
+			"points":14
+			},{
+			"text": "Salvia",
+			"points":7
+			},{
+			"text": "Prezzemolo",
+			"points":4
+			},{
+			"text": "Menta",
+			"points":3
+			},{
+			"text": "Erba/Weed",
+			"points":3
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Dimmi il nome di una pianta che la gente potrebbe coltivare sul balcone",
+		"answers":[
+			{
+			"text": "Fiori",
+			"points":33
+			},{
+			"text": "Rosmarino",
+			"points":31
+			},{
+			"text": "Pomodori",
+			"points":14
+			},{
+			"text": "Salvia",
+			"points":7
+			},{
+			"text": "Prezzemolo",
+			"points":4
+			},{
+			"text": "Menta",
+			"points":3
+			},{
+			"text": "Erba/Weed",
+			"points":3
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Dimmi il nome di unveicolo con il quale non vorresti davvero fare un incidente quando sei in macchina!",
+		"answers":[
+			{
+			"text": "Volante polizia/ caramba/ vigili",
+			"points":44
+			},{
+			"text": "Pompieri",
+			"points":16
+			},{
+			"text": "Ambulanza",
+			"points":15
+			},{
+			"text": "Treno",
+			"points":10
+			},{
+			"text": "Carro funebre",
+			"points":6
+			},{
+			"text": "Suv",
+			"points":2
+			},{
+			"text": "Supercar",
+			"points":2
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Dove potresti nascondere qualcosa che vuoi portare di nascosto in prigione?",
+		"answers":[
+			{
+			"text": "In una torta/ alimento",
+			"points":34
+			},{
+			"text": "Su per il culo",
+			"points":30
+			},{
+			"text": "Mutande",
+			"points":10
+			},{
+			"text": "Reggiseno",
+			"points":9
+			},{
+			"text": "Scarpa/e",
+			"points":5
+			},{
+			"text": "Calzino/i",
+			"points":3
+			},{
+			"text": "Capelli",
+			"points":3
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Dimmi una parte del corpo per la quale le persone si rivolgono a un chirurgo plastico.",
+		"answers":[
+			{
+			"text": "Tette",
+			"points":30
+			},{
+			"text": "Naso",
+			"points":18
+			},{
+			"text": "Labbra",
+			"points":16
+			},{
+			"text": "Pancia",
+			"points":12
+			},{
+			"text": "Culo",
+			"points":8
+			},{
+			"text": "Guancie/ Zigomi",
+			"points":6
+			},{
+			"text": "Orecchie",
+			"points":4
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Qual � la prima cosa che faresti se ereditassi un milione di euro?",
+		"answers":[
+			{
+			"text": "Mollare lavoro/studi",
+			"points":27
+			},{
+			"text": "Nuova macchina",
+			"points":24
+			},{
+			"text": "Nuova casa",
+			"points":22
+			},{
+			"text": "Vancanza",
+			"points":10
+			},{
+			"text": "Ripagare debiti",
+			"points":6
+			},{
+			"text": "Investire",
+			"points":6
+			},{
+			"text": "Droga",
+			"points":4
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Dammi il nome di un frutto/ortaggio che ti ricorda una parte del corpo umano.",
+		"answers":[
+			{
+			"text": "Banana",
+			"points":33
+			},{
+			"text": "Patata",
+			"points":24
+			},{
+			"text": "Pisello",
+			"points":18
+			},{
+			"text": "Fava",
+			"points":9
+			},{
+			"text": "Melone",
+			"points":6
+			},{
+			"text": "Melanzana",
+			"points":4
+			},{
+			"text": "Pera",
+			"points":2
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Dimmi il mese dell'anno in cui nasce il maggior numero di bambini in Italia",
+		"answers":[
+			{
+			"text": "Ottobre",
+			"points":26
+			},{
+			"text": "Settembre",
+			"points":22
+			},{
+			"text": "Luglio",
+			"points":18
+			},{
+			"text": "Gennaio",
+			"points":12
+			},{
+			"text": "Maggio",
+			"points":8
+			},{
+			"text": "Agosto",
+			"points":4
+			},{
+			"text": "Marzo",
+			"points":2
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Nominate qualcosa che speri davvero che il pilota del tuo aeroplano non stia facendo.",
+		"answers":[
+			{
+			"text": "Pisolino",
+			"points":30
+			},{
+			"text": "Droga",
+			"points":21
+			},{
+			"text": "Ubriacarsi",
+			"points":20
+			},{
+			"text": "Messaggiare / giocare al cell",
+			"points":9
+			},{
+			"text": "la hostess / lo steward",
+			"points":9
+			},{
+			"text": "Pausa bagno",
+			"points":4
+			},{
+			"text": "Leggere le istruzioni",
+			"points":3
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Dimmi il nome di un posto che sarebbe redditizio da derubare se riuscissi a farla franca.",
+		"answers":[
+			{
+			"text": "Banca",
+			"points":37
+			},{
+			"text": "Gioielleria",
+			"points":28
+			},{
+			"text": "Casin�",
+			"points":16
+			},{
+			"text": "Museo",
+			"points":6
+			},{
+			"text": "Concessionario auto",
+			"points":4
+			},{
+			"text": "Poste",
+			"points":3
+			},{
+			"text": "Tabacchino",
+			"points":2
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Nominate una professione che a volte richiede che i suoi membri siano nudi o quasi.",
+		"answers":[
+			{
+			"text": "Stripper",
+			"points":26
+			},{
+			"text": "Modello/a",
+			"points":24
+			},{
+			"text": "Attore/ice",
+			"points":19
+			},{
+			"text": "Prostituta/ gigol�",
+			"points":18
+			},{
+			"text": "fashion blogger / Influencer",
+			"points":4
+			},{
+			"text": "Wrestler",
+			"points":4
+			},{
+			"text": "Se qualcuno ti chiedesse di uscire con lui/lei, che scusa daresti se non fossi interessato/a?",
+			"points":0
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Sono fidanzato/a",
+		"answers":[
+			{
+			"text": "Non sono interessato",
+			"points":32
+			},{
+			"text": "Gay",
+			"points":17
+			},{
+			"text": "Impegnato",
+			"points":5
+			},{
+			"text": "Non volgio vedere nessuno",
+			"points":4
+			},{
+			"text": "Non sono di queste parti",
+			"points":3
+			},{
+			"text": "Non sei il mio tipo",
+			"points":2
+			},{
+			"text": "Dimmi qualcosa che NON dovresti prendere/raccogliere a mani nude",
+			"points":0
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Piatto / tazza calda",
+		"answers":[
+			{
+			"text": "Cacca",
+			"points":24
+			},{
+			"text": "Pianta con spine",
+			"points":19
+			},{
+			"text": "rifiuti",
+			"points":18
+			},{
+			"text": "Siringa",
+			"points":4
+			},{
+			"text": "Cadavere / Arma delitto",
+			"points":4
+			},{
+			"text": "Dimmi il nome di qualcosa senza la quale non esci mai di casa.",
+			"points":0
+			},{
+			"text": "Cellulare",
+			"points":46
+			},{
+			"text": "niente",
+			"points":0
+			}
+			]
+		},
+		{
+		"text":"Borsa/etta",
+		"answers":[
+			{
+			"text": "Portafogli",
+			"points":10
+			},{
+			"text": "Chiavi",
+			"points":5
+			},{
+			"text": "Soldi",
+			"points":2
+			},{
+			"text": "Vestiti",
+			"points":2
+			},{
+			"text": "Occhiali",
+			"points":2
+            },
+            {
+            "text": "Occhiali",
+            "points":2
+            },
+            {
+            "text": "Occhiali",
+            "points":2
+            },
+            {
+            "text": "Occhiali",
+            "points":2
+            }
+        ]   
+        }
+    ]
+}
